@@ -1,0 +1,92 @@
+﻿@model Quick_Med_Kit.Models.Medicament
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="~/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+    <title>Mask Covid 19</title>
+    <style>
+            @*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');*@
+            section{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                }
+                img{
+                        margin-top: 25px;
+                        height: 550px;
+                        width: 300px;
+                        border-radius: 12px;
+                }
+                label
+                {
+                    font-family: 'Poppins',sans-serif;
+                    font-size: 30px;
+                }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container" style="background-color:lightcyan;">
+            @*@foreach (var item in Model)
+            {*@
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="@Url.Content(Model.upload_images)" style="height: 400px;" class="img-fluid" alt="" />
+                        <label style="margin-top: 10px;">Prix: @Html.DisplayFor(model => model.Prix) MAD</label>
+                    </div>
+                    <div class="col-md-8" style="margin-top: 25px;">
+                        <h1>Description</h1>
+                        <p>
+                            @Html.DisplayFor(model => model.Description)
+                        </p><br />
+                        <h1>Date Production-Date Expiration</h1>
+                        <p>
+                            @Html.DisplayFor(model => model.Date_Production)-@Html.DisplayFor(model => model.Date_expiration)
+                        </p><br />
+                        <h1>Droit d'usage</h1>
+                        <p>
+                            @Html.DisplayFor(model => model.Droit_Usage)
+                        </p><br />
+                    </div>
+                </div>
+                <!--<div class="row" style="margin-bottom: 30px;">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-4">
+                        <button class="btn" style="color: #000; border: #000 solid 2px; font-size: 20px;" onmouseover="this.style.background='#000';this.style.color='#fff';" onmouseout="this.style.background='none';this.style.color='#000';" type="submit">Commander</button>
+                        <button class="btn" style="color: #000; border: #000 solid 2px; font-size: 20px;" onmouseover="this.style.background='#000';this.style.color='#fff';" onmouseout="this.style.background='none';this.style.color='#000';" type="submit">Ajouter Au Panier</button>
+                    </div>-->
+                    @*<div class="col-md-3">
+                        <label style="font-size:20px ;">Quantité : </label>
+                        <button class="btn" style="color: #000; font-size: 30px;" type="submit" onclick="down()">-</button>&nbsp;
+                        <label id="qnt">1</label>&nbsp;<button class="btn" style="color: #000; border: none; font-size: 30px;" type="submit" onclick="up()">+</button>
+                    </div>*@
+                <!--</div>-->
+            @*}*@
+        </div>
+    </section>
+    <script lang="javascript">
+        var temp = 1;
+        function up() {
+            temp = temp + 1;
+            document.getElementById('qnt').innerHTML = temp;
+        }
+        function down() {
+            if (temp == 1) {
+                temp = 1;
+            }
+            else {
+                temp = temp - 1;
+                document.getElementById('qnt').innerHTML = temp;
+            }
+        }
+    </script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

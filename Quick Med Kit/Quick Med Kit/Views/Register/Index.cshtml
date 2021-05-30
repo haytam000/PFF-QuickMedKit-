@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="~/css/clientformulaire.css">
+    <link rel="stylesheet" href="~/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <title>Formulaire</title>
+</head>
+<body onload="disp()">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4" id="message1">
+            <div class="alert alert-success">
+                <span class="glyphicon gliphicon-ok"></span><strong>Success Message!<br/>Envoyé un Email à votre Adresse-Email avec lien de Confirmation!<br/>S'ils vous Plaît vérifier votre Email</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4" id="message2">
+            <div class="alert alert-danger">
+                <span class="glyphicon gliphicon-remove"></span><strong>Error Message! Votre Registration N'est pas Complete</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4" id="message3">
+            <div class="alert alert-danger">
+                <span class="glyphicon gliphicon-remove"></span><strong>Error Message! Votre Confirm Password est Faux</strong>
+            </div>
+        </div>
+    </div>
+    <!-- copy and paste for signup -->
+    <div class="container1">
+        <section class="signup">
+            <div class="logo">
+                <table>
+                    <tr>
+                        <td><img src="~/images/Mask_2048x2048.png" style="width: 70px; height: 70px;margin-left: 50%;margin-top: 1rem;" class="img-fluid" /></td>
+                        <td><label style="font-size: 35px;-webkit-text-stroke: 3px;-webkit-text-stroke-color: #000;margin-left: 40px;-webkit-text-fill-color: transparent;margin-top: 28px;">Quick Med Kit</label></td>
+                    </tr>
+                </table>
+            </div>
+            <form action="" id="registration">
+                <input type="text" class="form-control" placeholder="User Name" name="Nom_Utiliateur" id="user" required>
+                <input type="email" class="form-control" placeholder="Email" name="Email_Utilisateur" id="email" required>
+                <input type="tel" class="form-control" placeholder="Phone Number" name="telephone_Utilisateur" id="tel" required>
+                <input type="password" class="form-control" placeholder="Password" name="Pswrd_Utilisateur" id="pass" required>
+                <input type="password" class="form-control" placeholder="Confirm Password" id="passconf" required>
+                <input type="button" value="SignUp" onclick="SaveForm()" class="bg-success" style=" width: 40%; height: 40px; margin: 0 2px; font-size: 20px; font-weight: 500; margin: 2rem 7rem; color: #fff; border: none;">
+                <p>You alredy have an account? <a href="@Url.Action("Login","Utilisateur")">Login</a> </p>
+            </form>
+            <div class="media">
+                <li><a  href="@Url.Action("Index","Future")"><i class="fab fa-google-plus-g fa-2x" style="color: red;"></i></a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li><a href="@Url.Action("Index","Future")"><i class="fab fa-facebook fa-2x" style="color: blue;"></i></a></li>
+            </div>
+        </section>
+        <div class="empty">
+            <div class="empty1">
+                <div class="content">
+                    <h1>مرحبا بكم</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+    <script>
+        function disp() {
+            $("#message1").hide();
+            $("#message2").hide();
+            $("#message3").hide();
+        }
+        function SaveForm() {
+            var name = $("#user").val();
+            var email = $("#email").val();
+            var tel = $("#tel").val();
+            var pass = $("#pass").val();
+            var check1 = 0;
+            var check2 = 0;
+            var passconf = $("#passconf").val();
+            if (name == "" || email == "" || tel == "" || pass == "" || passconf == "") {
+                $("#message1").hide();
+                $("#message2").show();
+                return false;
+            }
+            else {
+                check1 = 1;
+            }
+            if (check1 == 1) {
+                if (pass == passconf) {
+                    check2 = 1;
+                }
+                else {
+                    $("#message1").hide();
+                    $("#message2").hide();
+                    $("#message3").show();
+                }
+            }
+            if (check1 == 1 && check2 == 1) {
+                $("#message2").hide();
+                $("#message3").hide();
+                var data = $("#registration").serialize();
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/Register/SaveData",
+                    success: $("#message1").show()
+                });
+                $("#registration")[0].reset();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿@model Quick_Med_Kit.Models.Utilisateur
+
+@{
+    ViewBag.Title = "Supprimer";
+    Layout = "~/Views/LayoutUtilisateur.cshtml";
+}
+<h1 style="color:white">Vous êtes sûr de Supprimer votre Compte?</h1>
+<div>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" style="color:black;background-color:white" /> |
+            @Html.ActionLink("Retourner au Profil", "Profil")
+        </div>
+    }
+</div>

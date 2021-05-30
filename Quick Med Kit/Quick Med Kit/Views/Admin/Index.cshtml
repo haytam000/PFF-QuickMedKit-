@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Quick_Med_Kit.Models.Medicament>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<main>
+    @foreach (var item in Model)
+    {
+        <table style="margin-top: 50px;margin-left: 70px;">
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.upload_images)" style="height: 100px; width: 100px;" />
+                </td>
+                <td>
+                    <label style="color: white;margin-left: 80px; font-size: 30px;">@Html.DisplayFor(modelItem => item.Nom)</label>
+                </td>
+                <td>
+                    <a class="nav-link px-2" href="@Url.Action("Detail","Admin",new { id = item.Code_Medicament })"><i class="material-icons icon" style="margin-left:100px;font-size: 40px;">view_list</i></a>
+                </td>
+                <td style="color: white;">|</td>
+                <td>
+                    <a class="nav-link px-2" href="@Url.Action("Supprimer","Admin",new { id = item.Code_Medicament })"><i class="material-icons icon" style="font-size: 40px;">delete</i></a>
+                </td>
+                <td style="color: white;">|</td>
+                <td>
+                    <a class="nav-link px-2" href="@Url.Action("Modifier","Admin",new { id = item.Code_Medicament })"><i class="material-icons icon" style="font-size: 40px;">edit</i></a>
+                </td>
+            </tr>
+        </table>
+    }
+</main>

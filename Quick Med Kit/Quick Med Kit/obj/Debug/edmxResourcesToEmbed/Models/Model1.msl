@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QuickMedkitModelStoreContainer" CdmEntityContainer="QuickMedkitEntities">
+    <EntitySetMapping Name="Utilisateur">
+      <EntityTypeMapping TypeName="QuickMedkitModel.Utilisateur">
+        <MappingFragment StoreEntitySet="Utilisateur">
+          <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+          <ScalarProperty Name="ID_Utilisateur" ColumnName="ID_Utilisateur" />
+          <ScalarProperty Name="Nom_Utiliateur" ColumnName="Nom_Utiliateur" />
+          <ScalarProperty Name="Email_Utilisateur" ColumnName="Email_Utilisateur" />
+          <ScalarProperty Name="telephone_Utilisateur" ColumnName="telephone_Utilisateur" />
+          <ScalarProperty Name="Pswrd_Utilisateur" ColumnName="Pswrd_Utilisateur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicament">
+      <EntityTypeMapping TypeName="QuickMedkitModel.Medicament">
+        <MappingFragment StoreEntitySet="Medicament">
+          <ScalarProperty Name="upload_images" ColumnName="upload_images" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+          <ScalarProperty Name="Droit_Usage" ColumnName="Droit_Usage" />
+          <ScalarProperty Name="Date_expiration" ColumnName="Date_expiration" />
+          <ScalarProperty Name="Date_Production" ColumnName="Date_Production" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Code_Medicament" ColumnName="Code_Medicament" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commande">
+      <EntityTypeMapping TypeName="QuickMedkitModel.Commande">
+        <MappingFragment StoreEntitySet="Commande">
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Date_Commande" ColumnName="Date_Commande" />
+          <ScalarProperty Name="ID_Livreur" ColumnName="ID_Livreur" />
+          <ScalarProperty Name="ID_Utilisateur" ColumnName="ID_Utilisateur" />
+          <ScalarProperty Name="Code_Medicament" ColumnName="Code_Medicament" />
+          <ScalarProperty Name="ID_Commande" ColumnName="ID_Commande" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Livreur">
+      <EntityTypeMapping TypeName="QuickMedkitModel.Livreur">
+        <MappingFragment StoreEntitySet="Livreur">
+          <ScalarProperty Name="Isenligne" ColumnName="Isenligne" />
+          <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+          <ScalarProperty Name="Pswrd_telephone_Livreur" ColumnName="Pswrd_telephone_Livreur" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="telephone_Livreur" ColumnName="telephone_Livreur" />
+          <ScalarProperty Name="Email_Livreur" ColumnName="Email_Livreur" />
+          <ScalarProperty Name="CIN" ColumnName="CIN" />
+          <ScalarProperty Name="Prenom_Livreur" ColumnName="Prenom_Livreur" />
+          <ScalarProperty Name="Nom_Livreur" ColumnName="Nom_Livreur" />
+          <ScalarProperty Name="ID_Livreur" ColumnName="ID_Livreur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

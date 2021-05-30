@@ -1,0 +1,45 @@
+﻿@model Quick_Med_Kit.Models.Medicament
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<div>
+    <main>
+        <table style="margin-top: 50px;width: 100%;color:white;">
+            <tr style="border-bottom: solid 2px grey;">
+                <td style="border: solid 2px grey;">Image de Médicament</td>
+                <td style="border: solid 2px grey;">Code Médicament</td>
+                <td style="border: solid 2px grey;">Nom</td>
+                <td style="border: solid 2px grey;">Description</td>
+                <td style="border: solid 2px grey;">Date Production</td>
+                <td style="border: solid 2px grey;">Date Expiration</td>
+                <td style="border: solid 2px grey;">Prix Unitaire</td>
+                <td style="border: solid 2px grey;">Droit d'Usage</td>
+            </tr>
+            <tr style="border-bottom: solid 2px grey;">
+                <td style="border: solid 2px grey;"><img src="@Url.Content(Model.upload_images)" style="height: 90px;width: 90px;" /></td>
+                <td style="border: solid 2px grey;">@Html.DisplayFor(model=>model.Code_Medicament)</td>
+                <td style="border: solid 2px grey;"><label>@Html.DisplayFor(model => model.Nom)</label></td>
+                <td style="border: solid 2px grey;"><p>@Html.DisplayFor(model => model.Description)</p></td>
+                <td style="border: solid 2px grey;">
+                    <label>@Html.DisplayFor(model => model.Date_Production)</label>
+                </td>
+                <td style="border: solid 2px grey;">
+                    <label>@Html.DisplayFor(model => model.Date_expiration)</label>
+                </td>
+                <td style="border: solid 2px grey;">
+                    <label>@Html.DisplayFor(model => model.Prix) MAD</label>
+                </td>
+                <td style="border: solid 2px grey;">
+                    <label>@Html.DisplayFor(model => model.Droit_Usage)</label>
+                </td>
+            </tr>
+        </table>
+    </main>
+</div>
+<br/>
+<br/>
+<p>
+    @Html.ActionLink("Retourne au liste des Médicaments", "Index")
+</p>

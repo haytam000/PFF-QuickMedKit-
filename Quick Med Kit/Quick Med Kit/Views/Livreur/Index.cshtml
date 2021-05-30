@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Quick_Med_Kit.Models.Commande>
+
+@{
+    ViewBag.Title = "ListCommande";
+    Layout = "~/Views/LayoutLivreur.cshtml";
+}
+<div>
+    <main>
+        <h1 style="color:white;text-decoration:underline">Liste Des Commandes effectueé</h1>
+        <table style="margin-top: 50px;width: 100%;color:white;">
+            <tr style="border-bottom: solid 2px grey;">
+                <td style="border: solid 2px grey;">Code Médicament</td>
+                <td style="border: solid 2px grey;">Date Commande</td>
+                <td style="border: solid 2px grey;">Quantity</td>
+                <td style="border: solid 2px grey;">Prix Unitaire</td>
+                <td style="border: solid 2px grey;">Total</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr style="border-bottom: solid 2px grey;">
+                    <td style="border: solid 2px grey;">@Html.DisplayFor(modelItem => item.Code_Medicament)</td>
+                    <td style="border: solid 2px grey;">
+                        <label>@Html.DisplayFor(modelItem => item.Date_Commande)</label>
+                    </td>
+                    <td style="border: solid 2px grey;">
+                        <label>@Html.DisplayFor(modelItem => item.Quantity)</label>
+                    </td>
+                    <td style="border: solid 2px grey;">
+                        <label>@Html.DisplayFor(modelItem => item.Prix) MAD</label>
+                    </td>
+                    <td style="border: solid 2px grey;">
+                        <label>@Html.DisplayFor(modelItem => item.total) MAD</label>
+                    </td>
+                </tr>
+            }
+        </table>
+    </main>
+</div>

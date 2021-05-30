@@ -1,0 +1,39 @@
+﻿@model Quick_Med_Kit.Models.Utilisateur
+
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/LayoutUtilisateur.cshtml";
+}
+<h1 style="color:white;text-decoration:underline">Infos Profil</h1>
+<div>
+    <table style="margin-top: 50px;margin-left: 05px;width:100%">
+        <tr>
+            <td style="color:white;text-decoration:underline;font-size:25px">Nom  </td>
+            <td style="color:white;text-decoration:underline;font-size:25px">Email  </td>
+            <td style="color:white;text-decoration:underline;font-size:25px">Téléphone  </td>
+            <td style="color:white;text-decoration:underline;font-size:25px">Mot de Passe  </td>
+        </tr>
+        <tr style="border-bottom:2px solid grey">
+            <td>
+                <label style="color: white;margin-left: 30px; font-size: 20px;">@Html.DisplayFor(model => model.Nom_Utiliateur)</label>
+            </td>
+            <td>
+                <label style="color: white;margin-left: 30px; font-size: 20px;">@Html.DisplayFor(model => model.Email_Utilisateur)</label>
+            </td>
+            <td>
+                <label style="color: white;margin-left: 30px; font-size: 20px;">@Html.DisplayFor(model => model.telephone_Utilisateur)</label>
+            </td>
+            <td>
+                <label style="color: white;margin-left: 30px; font-size: 20px;">@Html.DisplayFor(model => model.Pswrd_Utilisateur)</label>
+            </td>
+            <td style="border:solid 1px white"></td>
+            <td>
+                <a class="nav-link px-2" href="@Url.Action("Supprimer","UtilisateurProfil",new { id = Session["id_utilisateur"]  })"><i class="material-icons icon" style="font-size: 40px;">delete</i></a>
+            </td>
+            <td style="color: white;">|</td>
+            <td>
+                <a class="nav-link px-2" href="@Url.Action("Modifier","UtilisateurProfil",new { id = Session["id_utilisateur"]  })"><i class="material-icons icon" style="font-size: 40px;">edit</i></a>
+            </td>
+        </tr>
+    </table>
+</div>

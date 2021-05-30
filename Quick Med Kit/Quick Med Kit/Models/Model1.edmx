@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuickMedkitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="ID_Commande" />
+          </Key>
+          <Property Name="ID_Commande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_Medicament" Type="int" Nullable="false" />
+          <Property Name="ID_Utilisateur" Type="int" Nullable="false" />
+          <Property Name="ID_Livreur" Type="int" />
+          <Property Name="Date_Commande" Type="date" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Prix" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Livreur">
+          <Key>
+            <PropertyRef Name="ID_Livreur" />
+          </Key>
+          <Property Name="ID_Livreur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_Livreur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom_Livreur" Type="varchar" MaxLength="50" />
+          <Property Name="CIN" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Email_Livreur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone_Livreur" Type="int" />
+          <Property Name="age" Type="int" />
+          <Property Name="Pswrd_telephone_Livreur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsValid" Type="bit" />
+          <Property Name="Isenligne" Type="bit" />
+        </EntityType>
+        <EntityType Name="Medicament">
+          <Key>
+            <PropertyRef Name="Code_Medicament" />
+          </Key>
+          <Property Name="Code_Medicament" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date_Production" Type="date" />
+          <Property Name="Date_expiration" Type="date" />
+          <Property Name="Droit_Usage" Type="varchar" MaxLength="50" />
+          <Property Name="Prix" Type="money" />
+          <Property Name="upload_images" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="ID_Utilisateur" />
+          </Key>
+          <Property Name="ID_Utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_Utiliateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email_Utilisateur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone_Utilisateur" Type="int" />
+          <Property Name="Pswrd_Utilisateur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsValid" Type="bit" />
+        </EntityType>
+        <Association Name="fk_1">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="Code_Medicament" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="Code_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_2">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="ID_Utilisateur" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="ID_Utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_3">
+          <End Role="Livreur" Type="Self.Livreur" Multiplicity="0..1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livreur">
+              <PropertyRef Name="ID_Livreur" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="ID_Livreur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuickMedkitModelStoreContainer">
+          <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Livreur" EntityType="Self.Livreur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicament" EntityType="Self.Medicament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_1" Association="Self.fk_1">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="fk_2" Association="Self.fk_2">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="fk_3" Association="Self.fk_3">
+            <End Role="Livreur" EntitySet="Livreur" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuickMedkitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="ID_Utilisateur" />
+          </Key>
+          <Property Name="ID_Utilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_Utiliateur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email_Utilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephone_Utilisateur" Type="Int32" />
+          <Property Name="Pswrd_Utilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" />
+          <NavigationProperty Name="Commande" Relationship="QuickMedkitModel.fk_2" FromRole="Utilisateur" ToRole="Commande" />
+        </EntityType>
+        <EntityContainer Name="QuickMedkitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" />
+          <EntitySet Name="Medicament" EntityType="QuickMedkitModel.Medicament" />
+          <EntitySet Name="Commande" EntityType="QuickMedkitModel.Commande" />
+          <EntitySet Name="Livreur" EntityType="QuickMedkitModel.Livreur" />
+          <AssociationSet Name="fk_1" Association="QuickMedkitModel.fk_1">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="fk_2" Association="QuickMedkitModel.fk_2">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="fk_3" Association="QuickMedkitModel.fk_3">
+            <End Role="Livreur" EntitySet="Livreur" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Medicament">
+          <Key>
+            <PropertyRef Name="Code_Medicament" />
+          </Key>
+          <Property Name="Code_Medicament" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Production" Type="DateTime" Precision="0" />
+          <Property Name="Date_expiration" Type="DateTime" Precision="0" />
+          <Property Name="Droit_Usage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prix" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="upload_images" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Commande" Relationship="QuickMedkitModel.fk_1" FromRole="Medicament" ToRole="Commande" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="ID_Commande" />
+          </Key>
+          <Property Name="ID_Commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_Medicament" Type="Int32" Nullable="false" />
+          <Property Name="ID_Utilisateur" Type="Int32" Nullable="false" />
+          <Property Name="ID_Livreur" Type="Int32" />
+          <Property Name="Date_Commande" Type="DateTime" Precision="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Prix" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Medicament" Relationship="QuickMedkitModel.fk_1" FromRole="Commande" ToRole="Medicament" />
+          <NavigationProperty Name="Utilisateur" Relationship="QuickMedkitModel.fk_2" FromRole="Commande" ToRole="Utilisateur" />
+          <NavigationProperty Name="Livreur" Relationship="QuickMedkitModel.fk_3" FromRole="Commande" ToRole="Livreur" />
+        </EntityType>
+        <EntityType Name="Livreur">
+          <Key>
+            <PropertyRef Name="ID_Livreur" />
+          </Key>
+          <Property Name="ID_Livreur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_Livreur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom_Livreur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIN" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Email_Livreur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telephone_Livreur" Type="Int32" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="Pswrd_telephone_Livreur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsValid" Type="Boolean" />
+          <Property Name="Isenligne" Type="Boolean" />
+          <NavigationProperty Name="Commande" Relationship="QuickMedkitModel.fk_3" FromRole="Livreur" ToRole="Commande" />
+        </EntityType>
+        <Association Name="fk_1">
+          <End Type="QuickMedkitModel.Medicament" Role="Medicament" Multiplicity="1" />
+          <End Type="QuickMedkitModel.Commande" Role="Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="Code_Medicament" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="Code_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_2">
+          <End Type="QuickMedkitModel.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="QuickMedkitModel.Commande" Role="Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="ID_Utilisateur" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="ID_Utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_3">
+          <End Type="QuickMedkitModel.Livreur" Role="Livreur" Multiplicity="0..1" />
+          <End Type="QuickMedkitModel.Commande" Role="Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livreur">
+              <PropertyRef Name="ID_Livreur" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="ID_Livreur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuickMedkitModelStoreContainer" CdmEntityContainer="QuickMedkitEntities">
+          <EntitySetMapping Name="Utilisateur">
+            <EntityTypeMapping TypeName="QuickMedkitModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ID_Utilisateur" ColumnName="ID_Utilisateur" />
+                <ScalarProperty Name="Nom_Utiliateur" ColumnName="Nom_Utiliateur" />
+                <ScalarProperty Name="Email_Utilisateur" ColumnName="Email_Utilisateur" />
+                <ScalarProperty Name="telephone_Utilisateur" ColumnName="telephone_Utilisateur" />
+                <ScalarProperty Name="Pswrd_Utilisateur" ColumnName="Pswrd_Utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicament">
+            <EntityTypeMapping TypeName="QuickMedkitModel.Medicament">
+              <MappingFragment StoreEntitySet="Medicament">
+                <ScalarProperty Name="upload_images" ColumnName="upload_images" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="Droit_Usage" ColumnName="Droit_Usage" />
+                <ScalarProperty Name="Date_expiration" ColumnName="Date_expiration" />
+                <ScalarProperty Name="Date_Production" ColumnName="Date_Production" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Code_Medicament" ColumnName="Code_Medicament" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commande">
+            <EntityTypeMapping TypeName="QuickMedkitModel.Commande">
+              <MappingFragment StoreEntitySet="Commande">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Date_Commande" ColumnName="Date_Commande" />
+                <ScalarProperty Name="ID_Livreur" ColumnName="ID_Livreur" />
+                <ScalarProperty Name="ID_Utilisateur" ColumnName="ID_Utilisateur" />
+                <ScalarProperty Name="Code_Medicament" ColumnName="Code_Medicament" />
+                <ScalarProperty Name="ID_Commande" ColumnName="ID_Commande" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Livreur">
+            <EntityTypeMapping TypeName="QuickMedkitModel.Livreur">
+              <MappingFragment StoreEntitySet="Livreur">
+                <ScalarProperty Name="Isenligne" ColumnName="Isenligne" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="Pswrd_telephone_Livreur" ColumnName="Pswrd_telephone_Livreur" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="telephone_Livreur" ColumnName="telephone_Livreur" />
+                <ScalarProperty Name="Email_Livreur" ColumnName="Email_Livreur" />
+                <ScalarProperty Name="CIN" ColumnName="CIN" />
+                <ScalarProperty Name="Prenom_Livreur" ColumnName="Prenom_Livreur" />
+                <ScalarProperty Name="Nom_Livreur" ColumnName="Nom_Livreur" />
+                <ScalarProperty Name="ID_Livreur" ColumnName="ID_Livreur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

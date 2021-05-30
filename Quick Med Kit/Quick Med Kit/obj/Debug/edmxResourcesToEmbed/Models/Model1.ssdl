@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuickMedkitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="ID_Commande" />
+    </Key>
+    <Property Name="ID_Commande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code_Medicament" Type="int" Nullable="false" />
+    <Property Name="ID_Utilisateur" Type="int" Nullable="false" />
+    <Property Name="ID_Livreur" Type="int" />
+    <Property Name="Date_Commande" Type="date" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Prix" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Livreur">
+    <Key>
+      <PropertyRef Name="ID_Livreur" />
+    </Key>
+    <Property Name="ID_Livreur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_Livreur" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prenom_Livreur" Type="varchar" MaxLength="50" />
+    <Property Name="CIN" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="Email_Livreur" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telephone_Livreur" Type="int" />
+    <Property Name="age" Type="int" />
+    <Property Name="Pswrd_telephone_Livreur" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsValid" Type="bit" />
+    <Property Name="Isenligne" Type="bit" />
+  </EntityType>
+  <EntityType Name="Medicament">
+    <Key>
+      <PropertyRef Name="Code_Medicament" />
+    </Key>
+    <Property Name="Code_Medicament" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Date_Production" Type="date" />
+    <Property Name="Date_expiration" Type="date" />
+    <Property Name="Droit_Usage" Type="varchar" MaxLength="50" />
+    <Property Name="Prix" Type="money" />
+    <Property Name="upload_images" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="ID_Utilisateur" />
+    </Key>
+    <Property Name="ID_Utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_Utiliateur" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email_Utilisateur" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telephone_Utilisateur" Type="int" />
+    <Property Name="Pswrd_Utilisateur" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsValid" Type="bit" />
+  </EntityType>
+  <Association Name="fk_1">
+    <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicament">
+        <PropertyRef Name="Code_Medicament" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="Code_Medicament" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_2">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="ID_Utilisateur" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="ID_Utilisateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_3">
+    <End Role="Livreur" Type="Self.Livreur" Multiplicity="0..1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livreur">
+        <PropertyRef Name="ID_Livreur" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="ID_Livreur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuickMedkitModelStoreContainer">
+    <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Livreur" EntityType="Self.Livreur" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medicament" EntityType="Self.Medicament" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_1" Association="Self.fk_1">
+      <End Role="Medicament" EntitySet="Medicament" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+    <AssociationSet Name="fk_2" Association="Self.fk_2">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+    <AssociationSet Name="fk_3" Association="Self.fk_3">
+      <End Role="Livreur" EntitySet="Livreur" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

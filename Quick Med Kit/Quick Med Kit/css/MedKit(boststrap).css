@@ -1,0 +1,62 @@
+#header-top{
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  #header-top a{
+    font-weight: bold;
+    text-decoration: underline;
+    color: darkseagreen;
+}
+.sepa{
+    height: 05px;
+}
+.home-content{
+    background: url(../images/71-712336_surgery.jpg);
+    background-size: 100% 100%;
+    height: auto;
+}
+.inter{
+    font-family: 'Lucida Sans';
+}
+.inter2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#nav a:hover{
+    color:darkseagreen;
+    transition: .5s ;
+}
+#sec2{
+    height: auto;
+    background-color:lightcyan;
+    padding: 60px;
+    color: darkblue;
+    font-size: 25px;
+}
+#ref{
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 0;
+}
+em{
+    letter-spacing: 3px;
+}
+.h24{
+    height: 100px;
+    width: 100px;
+}
+.desc
+{
+    font-size: 18px;
+}
+.sepa2{
+    height: 20px;
+}
+#up{
+    width: 50px;
+    height: 50px;
+    right: 10px;
+    bottom: 10px;
+    position: fixed;
+}

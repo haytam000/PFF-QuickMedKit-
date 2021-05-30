@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="~/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <title>Formulaire</title>
+</head>
+<body>
+    <br />
+    <br />
+    <div class="alert alert-warning" id="previous">
+        <strong>Confirme Votre Compte</strong>
+        <input type="button" value="Confirme" onclick="Verified()" class="btn btn-warning" />
+    </div>
+    <div class="alert alert-success" id="after" style="display:none">
+        <strong><span class="glyphicon glyphicon-ok"></span> Votre Compte est Active Maintenant</strong>
+    </div>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+    <script>
+        function Verified() {
+            $.ajax({
+                type: "post",
+                url: "/RegisterLivreur/RegisterConfirm",
+                data: { 'regId': '@ViewBag.regID' },
+                success: function (msg) {
+                    $("#previous").hide();
+                    $("#after").show();
+                    alert(msg);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
+</html>

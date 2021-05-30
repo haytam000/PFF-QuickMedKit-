@@ -1,0 +1,138 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="~/css/livreurformulaire.css">
+    <link rel="stylesheet" href="~/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm//fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+    <title>Formulaire</title>
+</head>
+<body onload="disp()">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4" id="message1" style="position:absolute;float:right;margin-top:-320px;margin-left:66%;">
+            <div class="alert alert-success">
+                <span class="glyphicon gliphicon-ok"></span><strong>Success Message!<br />Envoyé un Email à votre Adresse-Email avec lien de Confirmation!<br />S'ils vous Plaît vérifier votre Email</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4" id="message2" style="position:absolute;float:right;margin-top:-320px;margin-left:66%;">
+            <div class="alert alert-danger">
+                <span class="glyphicon gliphicon-remove"></span><strong>Error Message! Your Registration Is Not Complete</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4" id="message3" style="position:absolute;float:right;margin-top:-320px;margin-left:66%;">
+            <div class="alert alert-danger">
+                <span class="glyphicon gliphicon-remove"></span><strong>Error Message! Your Confirm Password is Wrong</strong>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- copy and paste for signup -->
+        <div class="title">Registration</div>
+        <div class="content">
+            <form action="" id="registration">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Nom</span>
+                        <input type="text" placeholder="Entrer votre nom" name="Nom_Livreur" id="nom" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Prénom</span>
+                        <input type="text" placeholder="Entrer votre prénom" name="Prenom_Livreur" id="prn" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">CIN</span>
+                        <input type="text" placeholder="Entrer votre CIN" name="CIN" id="cin" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="email" placeholder="Entrer votre email" name="Email_Livreur" id="email" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Numéro du Téléphone</span>
+                        <input type="tel" placeholder="Entrer votre numéro" name="telephone_Livreur" id="tel" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Age</span>
+                        <input type="number" placeholder="Entrer votre age" name="age" id="age" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Password</span>
+                        <input type="password" placeholder="Enter your password" name="Pswrd_telephone_Livreur" id="pswrd" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Confirm Password</span>
+                        <input type="password" placeholder="Confirm your password" id="conf_pswrd" required>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="button" value="Register" onclick="SaveForm()">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function disp() {
+            $("#message1").hide();
+            $("#message2").hide();
+            $("#message3").hide();
+        }
+        function SaveForm() {
+            var nom = $("#nom").val();
+            var prn = $("#prn").val();
+            var cin = $("#cin").val();
+            var email = $("#email").val();
+            var age = $("#age").val();
+            var tel = $("#tel").val();
+            var pass = $("#pswrd").val();
+            var check1 = 0;
+            var check2 = 0;
+            var passconf = $("#conf_pswrd").val();
+            if (nom == "" || prn == "" || cin == "" || email == "" || age == "" || tel == "" || pass == "" || passconf == "") {
+                $("#message1").hide();
+                $("#message2").show();
+                return false;
+            }
+            else {
+                check1 = 1;
+            }
+            if (check1 == 1) {
+                if (pass == passconf) {
+                    check2 = 1;
+                }
+                else {
+                    $("#message1").hide();
+                    $("#message2").hide();
+                    $("#message3").show();
+                }
+            }
+            if (check1 == 1 && check2 == 1) {
+                $("#message2").hide();
+                $("#message3").hide();
+                var data = $("#registration").serialize();
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/Registerlivreur/SaveDataLivreur",
+                    success: $("#message1").show()
+                });
+                $("#registration")[0].reset();
+            }
+        }
+    </script>
+</body>
+</html>

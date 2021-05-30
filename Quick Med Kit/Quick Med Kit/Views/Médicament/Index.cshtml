@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Quick_Med_Kit.Models.Medicament>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="~/css/Médicaments.css">
+    <link rel="stylesheet" href="~/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+    <title>Médicament</title>
+</head>
+<body>
+    <section>
+        <div class="container text-center" style="background-color:lightcyan;">
+            <div class="row">
+                <div class="col-md-5">
+                    <label style="font-size: 50px;-webkit-text-stroke: 3px;-webkit-text-stroke-color: #000;-webkit-text-fill-color: transparent;margin-top: 10px;text-decoration: underline;">Médicaments</label>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <form class="d-flex" style="margin-top: 29px;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn" style="color: #000; border: #000 solid 2px; font-size: 20px;" onmouseover="this.style.background='#000';this.style.color='#fff';" onmouseout="this.style.background='none';this.style.color='#000';" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="col-md-1">
+                    <a href="@Url.Action("ShoppingCart","Médicament",new { id="CartItem" })"><img src="~/images/shopping-cart-vector-clipart.png" style="height: 45px; width: 45px;" /></a><label id="cart" style="background-color:black;color:white;border-radius:7px;padding:5px;font-size:12px;">0</label>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4">
+                        @*<a href="@Url.Action("Index", "Médicinfo",new { id = item.Code_Medicament })"><img src="@Url.Content(item.upload_images)" class="img-fluid" alt="" /></a>*@
+                        <table>
+                            <tr>
+                                <td colspan="2"><a href="@Url.Action("Index", "Médicinfo",new { id = item.Code_Medicament })"><img src="@Url.Content(item.upload_images)" class="img-fluid" alt="" /></a></td>
+                            </tr>
+                            <tr>
+                                <td><label>@Html.DisplayFor(modelItem => item.Nom)</label></td>
+                                <td>
+                                    @*@using (Html.BeginForm("addtocart", "Médicament",new { id = item.Code_Medicament }))*@
+                                    @*{*@<button type="button" name="add" onclick="add(this)" itemid="@item.Code_Medicament" style="border:none;background-color:transparent;padding:0px;margin:0px"><img src="~/images/shopping-cart-vector-clipart.png" style="height: 30px; width:30px;margin-top:0px" /></button>@*}*@
+                                </td>
+                            </tr>
+                    </table>
+                    @*<label>@Html.DisplayFor(modelItem => item.Nom)</label>*@@*@using (Html.BeginForm("addtocart","Médicament",new { id=item.Code_Medicament },FormMethod.Post)){<button type="submit" onclick="add()" style="border:none;background-color:transparent;padding:0px;margin:0px"><img src="~/images/shopping-cart-vector-clipart.png" style="height: 30px; width:30px;/*margin-bottom:42px;margin-left:40px*/" /></button>}*@
+                    @*<a href="#" onclick="add()"><img src="~/images/shopping-cart-vector-clipart.png" style="height: 30px; width:30px;margin-bottom:42px;margin-left:40px" /></a>*@
+                </div>
+            }
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        var temp = 0;
+        function add(item) {
+            var itemId = $(item).attr("itemid")
+            var formData = new FormData();
+            formData.append("itemid", itemId);
+
+            $.ajax({
+                async: true,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                url: '/Médicament/Index',
+                success: function () {
+                    temp += 1;
+                    document.getElementById('cart').innerHTML = temp;
+                },
+                error: function () {
+                alert("Votre Médicament n'as pas bien Ajouté au Panier");
+                }
+            });
+        }
+    </script>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

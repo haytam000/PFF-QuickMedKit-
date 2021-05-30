@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5491d16feb684d92b63539cb0a6df0fb" Name="Diagram1">
+        <EntityTypeShape EntityType="QuickMedkitModel.Utilisateur" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuickMedkitModel.Medicament" Width="1.5" PointX="3.5" PointY="2" />
+        <EntityTypeShape EntityType="QuickMedkitModel.Commande" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="QuickMedkitModel.Livreur" Width="1.5" PointX="5.375" PointY="4" />
+        <AssociationConnector Association="QuickMedkitModel.fk_1" />
+        <AssociationConnector Association="QuickMedkitModel.fk_2" />
+        <AssociationConnector Association="QuickMedkitModel.fk_3" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
